@@ -1,6 +1,6 @@
 <template>
   <div id="wrapper">
-    <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
+    <!-- <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
     <main>
       <div class="left-side">
         <span class="title">
@@ -25,19 +25,36 @@
           <button class="alt" @click="open('https://vuejs.org/v2/guide/')">Vue.js</button>
         </div>
       </div>
-    </main>
+    </main> -->
+    <div id="chart"></div>
   </div>
 </template>
 
 <script>
+  import G2 from '@antv/g2';
   import SystemInformation from './LandingPage/SystemInformation';
 
   export default {
     name: 'landing-page',
     components: { SystemInformation },
+    mounted() {
+      this.initChart();
+    },
     methods: {
-      open(link) {
-        this.$electron.shell.openExternal(link);
+
+      initChart() {
+        const data = [{ year: '1951 年', sales: 38 }, { year: '1952 年', sales: 52 }, { year: '1956 年', sales: 61 }, { year: '1957 年', sales: 145 }, { year: '1958 年', sales: 48 }, { year: '1959 年', sales: 38 }, { year: '1960 年', sales: 38 }, { year: '1962 年', sales: 38 }];
+        const chart = new G2.Chart({
+          container: 'chart',
+          forceFit: true,
+          height: window.innerHeight,
+        });
+        chart.source(data);
+        chart.scale('sales', {
+          tickInterval: 20,
+        });
+        chart.interval().position('year*sales');
+        chart.render();
       },
     },
   };
