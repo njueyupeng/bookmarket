@@ -22,6 +22,7 @@ module.exports = {
     'no-shadow': 0,
     'import/extensions': 0,
     'import/newline-after-import': 0,
+    'linebreak-style': ["off", "windows"],
     'no-multi-assign': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
